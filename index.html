@@ -34,8 +34,14 @@
 		<div class="container">
 
 					<div class="row-fluid">
+            <div class="span6 well">
+              <legend>Calculated Refund</legend>
+              <div>
+              </div>
+            </div>
 
 						<div class="span6 well">
+							<legend>Inputs</legend>
               <div id="calc-board">
               <div class="row">
                 <div class="col-sm-1"></div>
@@ -44,9 +50,18 @@
 										<label for="c2">Taxable Income</label>
 										<div class="input-group"> 
 												<span class="input-group-addon">$</span>
-												<input type="number" value="1000" min="0" step="1" data-number-to-fixed="0" data-number-stepfactor="100" class="form-control currency" id="c2" />
+												<input type="number" value="1000" min="0" step="1000" data-number-to-fixed="0" data-number-stepfactor="100" class="form-control currency" id="TaxableIncomeInput" />
 										</div> 
-									</div>
+                </div>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+								<div class="form-row">
+										<label for="c2">Financial Year</label>
+										<div class="input-group"> 
+												<input type="number" value="" min="2000" id="FinancialYearInput" />
+										</div> 
+                </div>
                 </div>
 							</div>
 							</div>
@@ -54,10 +69,81 @@
             </div>
 						<div class="span6 well">
 							<legend>Calculation</legend>
-							<div id="calc-panel">
-								<div id="calc-history">
-									<ol id="calc-history-list"></ol>
-								</div>
+              <div id="calc-panel">
+                <div class="price-form">
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<label class="control-label">Taxable Income ($): </label>
+											</div>
+											<div class="col-sm-6">
+                        <h3 id="TaxableIncomeOutput"> 100,000 </h3>
+											</div>
+                      <hr>
+										</div>
+									</div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="amount_amirol" class="control-label">Taxes Payable($):</label>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6">Tax on Tax Payable:</div>
+                  <div class="col-sm-6">40,000</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">Medicare Levy:</div>
+                  <div class="col-sm-6">40,000</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">Medicare Levy Surcharge:</div>
+                  <div class="col-sm-6">40,000</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">HELP Repayment:</div>
+                  <div class="col-sm-6">40,000</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                  </div>
+                  <div class="col-sm-6">
+                    <h3> 100,000 </h3>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="amount_amirol" class="control-label">Less Tax Offsets($):</label>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6">Withholding on Salaries and Wages:</div>
+                  <div class="col-sm-6">40,000</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">Low Income Tax Offset:</div>
+                  <div class="col-sm-6">40,000</div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                  </div>
+                  <div class="col-sm-6">
+                    <h3> 100,000 </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+                  </div>
 							</div>
 						</div>
 						<hr>
@@ -69,7 +155,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4>Payer Identity Data Record</h4>
+            <h4>Settings</h4>
           </div>
           <div class = "modal-body">
             <form class="well form-horizontal" data-toggle="validator" action=" " method="post" role="form" id="payer_form">
@@ -102,109 +188,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-md-2">
-                  <div class="inputGroupContainer">
-                    <div class="input-group">
-                      <input  name="ABNBranch" placeholder="001" class="form-control"  type="text" tabindex="-1">
-                    </div>
-                  </div>
-                  <div class="help-block"></div>
-                </div>
-                <hr>
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Contact Name</label>  
-                  <div class="col-md-7 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                      <input name="contactName" placeholder="Contact Name" onchange="formatCapitalize(this);" class="form-control"  type="text" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Contact Number</label>  
-                  <div class="col-md-7 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                      <input name="contactNumber" placeholder="Contact Number" class="form-control" type="text" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="help-block"></div>
-                <hr>
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Address</label>  
-                  <div class="col-md-7 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                      <input name="address" placeholder="Address" class="form-control" type="text" maxlength="38" required>
-                    </div>
-                  </div>
-                </div>
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Address</label>  
-                  <div class="col-md-7 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                      <input name="address2" placeholder="Address" class="form-control" type="text" maxlength="38">
-                    </div>
-                  </div>
-                </div>
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Suburb/City</label>  
-                  <div class="col-md-7 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                      <input name="suburb" onchange="formatCapitalize(this);" placeholder="Suburb" class="form-control"  type="text" required>
-                    </div>
-                  </div>
-                </div>
-                <!-- Select Basic -->
-                <div class="form-group">
-                  <label class="col-md-3 control-label">State</label>
-                  <div class="col-md-7 selectContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                      <select name="state" class="form-control selectpicker" required>
-                        <option value=" " >Please select your state</option>
-                        <option>NSW</option>
-                        <option>VIC</option>
-                        <option >QLD</option>
-                        <option >ACT</option>
-                        <option >TAS</option>
-                        <option >SA</option>
-                        <option >WA</option>
-                        <option >NT</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Postcode</label>  
-                  <div class="col-md-7 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                      <input name="postcode" placeholder="Postcode" class="form-control"  type="text" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="help-block"></div>
-                <hr>
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Financial Year</label>  
-                  <div class="col-md-7 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                      <input id="fybox" name="financialYear" placeholder="CCYY" class="form-control" pattern="^\d{4}$" type="text" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="help-block with-errors"></div>
-                <!-- Button -->
                 <div class="form-group">
                   <label class="col-md-10 control-label"></label>
                   <div class="col-md-2">
