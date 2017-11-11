@@ -35,9 +35,8 @@
 
 					<div class="row-fluid">
             <div class="span6 well">
-              <legend>Calculated Refund</legend>
-              <div>
-              </div>
+              <legend id="refundTitle">Calculated Payable</legend>
+              <h2 class="text-center" id="PayableVal" ></h2>
             </div>
 
 						<div class="span6 well">
@@ -50,7 +49,7 @@
 										<label for="c2">Taxable Income</label>
 										<div class="input-group"> 
 												<span class="input-group-addon">$</span>
-												<input type="number" value="1000" min="0" step="1000" data-number-to-fixed="0" data-number-stepfactor="100" class="form-control currency" id="TaxableIncomeInput" />
+                        <input type="number" value="50000" min="0" step="1000" data-number-to-fixed="0" data-number-stepfactor="100" class="form-control currency" id="TaxableIncomeInput" onclick="this.select()" />
 										</div> 
                 </div>
                 </div>
@@ -59,7 +58,7 @@
 								<div class="form-row">
 										<label for="c2">Financial Year</label>
 										<div class="input-group"> 
-												<input type="number" value="" min="2000" id="FinancialYearInput" />
+												<input type="number" value="" min="2000" id="FinancialYearInput" disabled />
 										</div> 
                 </div>
                 </div>
@@ -78,7 +77,7 @@
 												<label class="control-label">Taxable Income ($): </label>
 											</div>
 											<div class="col-sm-6">
-                        <h3 id="TaxableIncomeOutput"> 100,000 </h3>
+                        <h3 id="TaxableIncomeOutput"></h3>
 											</div>
                       <hr>
 										</div>
@@ -93,25 +92,25 @@
               <div class="container">
                 <div class="row">
                   <div class="col-sm-6">Tax on Tax Payable:</div>
-                  <div class="col-sm-6">40,000</div>
+                  <div class="col-sm-6" id="TaxPayableVal"></div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">Medicare Levy:</div>
-                  <div class="col-sm-6">40,000</div>
+                  <div class="col-sm-6" id="MedicareVal"></div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">Medicare Levy Surcharge:</div>
-                  <div class="col-sm-6">40,000</div>
+                  <div class="col-sm-6" id="MLSVal"></div>
                 </div>
-                <div class="row">
+                <div class="row" id="HELPRepayment" hidden="true">
                   <div class="col-sm-6">HELP Repayment:</div>
-                  <div class="col-sm-6">40,000</div>
+                  <div class="col-sm-6" id="HelpOffsetVal"></div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                   </div>
                   <div class="col-sm-6">
-                    <h3> 100,000 </h3>
+                    <h3 id="SumPayable"></h3>
                   </div>
                   <hr>
                 </div>
@@ -125,19 +124,19 @@
                 </div>
               </div>
               <div class="container">
-                <div class="row">
+                <div class="row" id="withholding" hidden="true">
                   <div class="col-sm-6">Withholding on Salaries and Wages:</div>
                   <div class="col-sm-6">40,000</div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-6">Low Income Tax Offset:</div>
-                  <div class="col-sm-6">40,000</div>
+                <div class="row" id="LITO">
+                  <div class="col-sm-6" >Low Income Tax Offset:</div>
+                  <div class="col-sm-6" id="LITOVal"></div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                   </div>
                   <div class="col-sm-6">
-                    <h3> 100,000 </h3>
+                    <h3 id="SumOffset"></h3>
                   </div>
                 </div>
               </div>
