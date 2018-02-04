@@ -30,6 +30,7 @@ function calculate() {
   $("#SumOffset").html(moneyNumber(sumOffsets));
   $("#SumPayable").html(moneyNumber(sumPayable));
   $("#PayableVal").html(moneyNumber(amountPayable));
+  $("#PayableVal2").html(moneyNumber(amountPayable));
 
   //TODO(Sean):Temporary budger repair levy
   //TODO(Sean):Excess private health reduction or refund
