@@ -160,47 +160,32 @@
             <h4>Settings</h4>
           </div>
           <div class = "modal-body">
-            <form class="well form-horizontal" data-toggle="validator" action=" " method="post" role="form" id="payer_form">
-              <fieldset>
-                <!-- Text input-->
-                <div class="form-group col-md-9">
-                  <label class="col-md-4 control-label">Business Name</label>  
-                  <div class="col-md-8 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                      <input  name="businessName" placeholder="Business Name" onchange="formatCapitalize(this);" class="form-control"  type="text">
-                    </div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-xs-6">
+									<div class="well">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="threshold" checked>
+											<label class="form-check-label" for="threshold">Has Health Insurance</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-6">
+                  <div class="well">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="hecs">
+											<label class="form-check-label" for="hecs">
+												HECS/HELP Debt
+											</label>
+										</div>
                   </div>
-                </div>
-                <div class="form-group col-md-3">
-                  <div class="inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                      <input  name="tradingName" onchange="formatCapitalize(this);" placeholder="Trading Name" class="form-control"  type="text" tabindex="-1">
-                    </div>
-                  </div>
-                </div>
-                <!-- Text input-->
-                <div class="form-group col-md-9">
-                  <label class="col-md-4 control-label">ABN</label>  
-                  <div class="col-md-8 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                      <input name="ABN" placeholder="ABN" class="form-control" pattern="^(\d *?){11}$" onChange="formatabntfn(this)" ondblclick="this.select()" type="text" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-10 control-label"></label>
-                  <div class="col-md-2">
-                    <button type="submit" class="btn btn-warning" >Save <span class="glyphicon glyphicon-user"></span></button>
-                  </div>
-                </div>
-              </fieldset>
-            </form>
+								</div>
+							</div>
+						</div>
           </div>
         </div>
       </div>
+    
     </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script> 
