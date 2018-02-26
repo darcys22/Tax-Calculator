@@ -67,14 +67,34 @@
 
   Estimator.prototype = {
 
-    calculateTaxPayable: function (taxableIncome, year) {
+    calculateTaxPayable: function (taxableIncome, parameters, year) {
 			var taxPayable = {};
       taxPayable.offsets = {};
 
+      //Tax
 			taxPayable.taxOnIncome = this.taxOnTaxableIncome(taxableIncome,year);
-			taxPayable.medicareLevy = this.round(taxableIncome* 0.02,0);
+
+      //HECS
+			taxPayable.hecs= 0;
+      if (parameters.hecs) {
+        taxPayable.hecs = this.hecsCalc(taxableIncome,year);
+      }
+
+      //Medicare Levy
+      taxPayable.medicareLevy = this.medicareLevyCalc(taxableIncome,year);
+
+      //Medicare Levy Surchage
 			taxPayable.medicareLevySurcharge = 0;
+      if (!parameters.healthinsurance) {
+        taxPayable.medicareLevySurcharge = this.medicareLevySurchargeCalc(taxableIncome,year);
+      }
+
+      //Low Income Tax Offset
 			taxPayable.offsets.lowIncomeTaxOffset = this.lowIncomeTaxOffset(taxableIncome,year);
+      taxPayable.totalTaxesPayable =  taxPayable.taxOnIncome + taxPayable.medicareLevy + taxPayable.medicareLevySurcharge + taxPayable.hecs;
+      if (taxPayable.totalTaxesPayable < taxPayable.offsets.lowIncomeTaxOffset)
+        taxPayable.offsets.lowIncomeTaxOffset = taxPayable.totalTaxesPayable;
+
 
       return taxPayable;
 
@@ -97,15 +117,70 @@
 			return this.round(54232 + ((taxableIncome - 180000) * 0.45),0);
 		},
 
+    hecsCalc: function(taxableIncome, year) {
+      var amount = 0;
+
+      var weeklyIncome = taxableIncome/52
+
+      if (weeklyIncome < 1073.99) { 
+        amount = 0;
+      } else if (weeklyIncome < 1195.99) { 
+        amount = weeklyIncome * 0.04;
+      } else if (weeklyIncome < 1318.99) { 
+        amount = weeklyIncome * 0.045;
+      } else if (weeklyIncome < 1387.99) { 
+        amount = weeklyIncome * 0.05;
+      } else if (weeklyIncome < 1491.99) { 
+        amount = weeklyIncome * 0.055;
+      } else if (weeklyIncome < 1615.99) { 
+        amount = weeklyIncome * 0.06;
+      } else if (weeklyIncome < 1700.99) { 
+        amount = weeklyIncome * 0.065;
+      } else if (weeklyIncome < 1871.99) { 
+        amount = weeklyIncome * 0.07;
+      } else if (weeklyIncome < 1994.99) { 
+        amount = weeklyIncome * 0.075;
+      } else { 
+        amount = weeklyIncome * 0.08;
+      } 
+
+			return this.round(amount * 52,0);
+		}, 
+
     lowIncomeTaxOffset: function(taxableIncome, year) {
 			var offset = 0;
 			if (taxableIncome <=  37000) {
-        return 445;
-      }
-			if (taxableIncome <=  66666) {
+        offset = 445;
+      } else if (taxableIncome <=  66666) {
         offset = this.round(445 - ((taxableIncome - 37000) * 0.015),0);
       }
       return offset;
+		},
+
+    medicareLevyCalc: function(taxableIncome, year) {
+			var levy = 0;
+			if (taxableIncome <=  21655) {
+        levy = 0;
+      } else if (taxableIncome <=  27068) {
+        levy = this.round((taxableIncome-21655)*0.1,0);
+      } else {
+        levy = this.round(taxableIncome* 0.02,0);
+      }
+      return levy;
+		},
+
+    medicareLevySurchargeCalc: function(taxableIncome, year) {
+			var surcharge = 0;
+			if (taxableIncome <=  90000) {
+        surcharge = 0;
+      } else if (taxableIncome <=  105000) {
+        surcharge = this.round(taxableIncome * 0.01,0);
+      } else if (taxableIncome <=  140000) {
+        surcharge = this.round(taxableIncome * 0.0125,0);
+      } else {
+        surcharge = this.round(taxableIncome * 0.015,0);
+      }
+      return surcharge;
 		},
 
     round: function(value, decimals) {

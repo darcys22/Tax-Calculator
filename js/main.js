@@ -10,22 +10,21 @@ $('#FinancialYearInput').on('input', function () {
     calculate();
 });
 $('#settingsModal').on('hidden.bs.modal', function () {
-    editSettings();
+    calculate();
 });
 
-function editSettings() {
-}
-
 function calculate() {
+  checkSettings();
   $("#TaxableIncomeOutput").html(moneyNumber(window.taxableIncome));
-  var payableObject = estimator.calculateTaxPayable(window.taxableIncome, window.FY);
+  var payableObject = estimator.calculateTaxPayable(window.taxableIncome,window.settings, window.FY);
   $("#TaxPayableVal").html(moneyNumber(payableObject.taxOnIncome));
   $("#MedicareVal").html(moneyNumber(payableObject.medicareLevy));
+  $("#HelpVal").html(moneyNumber(payableObject.hecs));
   $("#MLSVal").html(moneyNumber(payableObject.medicareLevySurcharge));
   $("#LITOVal").html(moneyNumber(payableObject.offsets.lowIncomeTaxOffset));
 
-  var sumPayable = payableObject.taxOnIncome + payableObject.medicareLevy + payableObject.medicareLevySurcharge
-  var sumOffsets = payableObject.offsets.lowIncomeTaxOffset
+  var sumPayable = payableObject.totalTaxesPayable;
+  var sumOffsets = payableObject.offsets.lowIncomeTaxOffset;
   var amountPayable = sumPayable - sumOffsets;
   $("#SumOffset").html(moneyNumber(sumOffsets));
   $("#SumPayable").html(moneyNumber(sumPayable));
@@ -42,6 +41,11 @@ function calculate() {
   //TODO(Sean):Superannuation Offset
   //TODO(Sean):Private health insurance
   
+}
+
+function checkSettings() {
+  window.settings.healthinsurance = document.getElementById("healthinsurance").checked
+  window.settings.hecs = document.getElementById("hecs").checked
 }
 
 function stripwhitecommas(str) {
@@ -61,6 +65,7 @@ function formatcomma(element) {
 }
 
 function main() {
+  window.settings = {};
   window.now = moment();
   if (window.now.month() < 6) {
     window.now.set('year', now.year() -1);
