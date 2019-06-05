@@ -102,7 +102,7 @@
     
     taxOnTaxableIncome: function(taxableIncome, year) {
       //2018 FY
-      if (year == 2018) {
+      if (year == '2018') {
         var offset = 0;
         if (taxableIncome <=  18200) {
           return 0;
@@ -118,7 +118,7 @@
         }
         return this.round(54232 + ((taxableIncome - 180000) * 0.45),0);
       //2019 FY
-      } else if (year == 2019) {
+      } else if (year == '2019') {
         var offset = 0;
         if (taxableIncome <=  18200) {
           return 0;
@@ -138,7 +138,7 @@
 
     hecsCalc: function(taxableIncome, year) {
       //2018 FY
-      if (year == 2018) {
+      if (year == '2018') {
         var amount = 0;
 
         var weeklyIncome = taxableIncome/52
@@ -167,7 +167,7 @@
 
         return this.round(amount * 52,0);
       //2019 FY
-      } else if (year == 2019) {
+      } else if (year == '2019') {
         var amount = 0;
 
         var weeklyIncome = taxableIncome/52
@@ -200,7 +200,7 @@
 
     lowIncomeTaxOffset: function(taxableIncome, year) {
       //2018 FY
-      if (year == 2018) {
+      if (year == '2018') {
         var offset = 0;
         if (taxableIncome <=  37000) {
           offset = 445;
@@ -209,7 +209,7 @@
         }
         return offset;
       //2019 FY
-      } else if (year == 2019) {
+      } else if (year == '2019') {
         var offset = 0;
         if (taxableIncome <=  37000) {
           offset = 445;
@@ -222,7 +222,7 @@
 
     medicareLevyCalc: function(taxableIncome, year) {
       //2018 FY
-      if (year == 2018) {
+      if (year == '2018') {
         var levy = 0;
         if (taxableIncome <=  21655) {
           levy = 0;
@@ -233,7 +233,7 @@
         }
         return levy;
       //2019 FY
-      } else if (year == 2019) {
+      } else if (year == '2019') {
         var levy = 0;
         if (taxableIncome <=  21655) {
           levy = 0;
@@ -248,7 +248,7 @@
 
     medicareLevySurchargeCalc: function(taxableIncome, year) {
       //2018 FY
-      if (year == 2018) {
+      if (year == '2018') {
         var surcharge = 0;
         if (taxableIncome <=  90000) {
           surcharge = 0;
@@ -261,7 +261,7 @@
         }
         return surcharge;
       //2019 FY
-      } else if (year == 2019) {
+      } else if (year == '2019') {
         var surcharge = 0;
         if (taxableIncome <=  90000) {
           surcharge = 0;
