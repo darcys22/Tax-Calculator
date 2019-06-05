@@ -78,7 +78,7 @@ function main() {
   $("#FinancialYearInput").attr({"max": window.endFY.format("YYYY")});
 
   window.taxableIncome = 50000;
-  window.FY = 2017;
+  window.FY = 2018;
   calculate();
 }
 main();
