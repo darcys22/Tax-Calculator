@@ -75,7 +75,7 @@ function main() {
   window.endFY = moment(window.now);
   window.startFY = moment(window.now.subtract(1, 'years').add(1,'days'));
   $("#FinancialYearInput").val(window.endFY.format("YYYY"));
-  $("#FinancialYearInput").attr({"max": window.endFY.format("YYYY")});
+  //$("#FinancialYearInput").attr({"max": window.endFY.format("YYYY")});
 
   window.taxableIncome = 50000;
   window.FY = 2018;
